@@ -1,0 +1,40 @@
+@(repeated: List[(String, List[List[String]])], numOfWords: Int) 
+
+@main("Quran Analysis: Hapax legomenon in Quran") {
+
+<div class="jumbotron text-center">
+    <div class="container">
+
+        <p class="text-right">
+            <a class="github-button" href="https://github.com/saqib-ali/quran-ngrams" data-style="mega" data-count-href="/saqib-ali/quran-ngrams/stargazers" data-count-api="/repos/saqib-ali/quran-ngrams#stargazers_count" data-count-aria-label="# stargazers on GitHub"
+            aria-label="Star saqib-ali/quran-ngrams on GitHub">Star</a>
+        </p>
+
+        <h1>Hapax legomenon in Quran</h1>
+        <p>This Scala app lets you perform n-gram Analytics on the English Translation of Quran</p>
+
+
+        <a type="button" class="btn btn-lg btn-default" href="/legomenon?repeated=1"></span>hapax legomenon</a>
+        <a type="button" class="btn btn-lg btn-default" href="/legomenon?repeated=2"></span>dis legomenon</a>
+        <a type="button" class="btn btn-lg btn-default" href="/legomenon?repeated=3"></span>tris legomenon</a>
+        <a type="button" class="btn btn-lg btn-default" href="/legomenon?repeated=4"></span>tetrakis legomenon</a>
+
+    </div>
+
+</div>
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Legomenon</th>
+                <th>Verses</th>
+            </tr>
+        </thead>
+        @for((word, verses) <- repeated) { <tr>
+            <td>@word</td>
+            <td>@for(List(chapter, versenum, word, versetxt, city) <- verses) { @versetxt <strong>(@chapter : @versenum - @city)</strong><br/><br/> }</td>            </tr>
+            }
+    </table>
+</div>
+
+}

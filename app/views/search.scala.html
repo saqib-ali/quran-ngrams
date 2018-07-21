@@ -1,0 +1,52 @@
+@(signs: List[List[String]], ngram: String) @main("Quran verses containing: " + ngram) {
+
+<!-- Place this tag where you want the button to render. -->
+
+<div class="jumbotron text-center">
+
+
+
+    <div class="container">
+
+        <p class="text-right">
+            <a class="github-button" href="https://github.com/saqib-ali/quran-ngrams" data-style="mega" data-count-href="/saqib-ali/quran-ngrams/stargazers" data-count-api="/repos/saqib-ali/quran-ngrams#stargazers_count" data-count-aria-label="# stargazers on GitHub"
+            aria-label="Star saqib-ali/quran-ngrams on GitHub">Star</a>
+        </p>
+
+
+        <h1>Quran N-gram Analytics</h1>
+        <p>This Scala app lets you perform n-gram Analytics on the English Translation of Quran</p>
+
+        <a type="button" class="btn btn-lg btn-default" href="/"></span>Home</a>
+        <a type="button" class="btn btn-lg btn-default" href="/?numOfWords=10"></span>10 words n-grams</a>
+        <a type="button" class="btn btn-lg btn-default" href="/?numOfWords=11"></span>11 words n-grams</a>
+        <a type="button" class="btn btn-lg btn-default" href="/?numOfWords=12"></span>12 words n-grams</a>
+        <a type="button" class="btn btn-lg btn-default" href="/?numOfWords=13"></span>13 words n-grams</a>
+        <a type="button" class="btn btn-lg btn-default" href="/?numOfWords=14"></span>14 words n-grams</a>
+    </div>
+
+</div>
+<div class="container">
+
+    @if(ngram != null){
+    <div class="alert alert-success text-center" role="alert">
+        Verses containing: <strong>@ngram</strong>
+    </div>
+    }
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Verse</th>
+            </tr>
+        </thead>
+        @signs.map {sign =>
+            <tr>
+                
+            <td>@Html(sign(2).replaceAll(ngram, "<b>" + ngram + "</b>")) <strong>(@sign(0) : @sign(1) - @sign(3))</strong> </td>
+            </tr>
+            }
+    </table>
+</div>
+
+}

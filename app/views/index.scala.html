@@ -1,0 +1,44 @@
+@(ngrams: List[(String, Int)], numOfWords: Int) 
+
+
+@main("Quran Analysis: " + numOfWords + " word N-grams in Quran") {
+
+<div class="jumbotron text-center">
+    <div class="container">
+
+        <p class="text-right">
+            <a class="github-button" href="https://github.com/saqib-ali/quran-ngrams" data-style="mega" data-count-href="/saqib-ali/quran-ngrams/stargazers" data-count-api="/repos/saqib-ali/quran-ngrams#stargazers_count" data-count-aria-label="# stargazers on GitHub"
+            aria-label="Star saqib-ali/quran-ngrams on GitHub">Star</a>
+        </p>
+
+        <h1>Quran N-gram Analytics</h1>
+        <p>This Scala app lets you perform n-gram Analytics on the English Translation of Quran</p>
+
+        <a type="button" class="btn btn-lg btn-default" href="/"></span>Home</a>
+        <a type="button" class="btn btn-lg btn-default" href="/?numOfWords=10"></span>10 words n-grams</a>
+        <a type="button" class="btn btn-lg btn-default" href="/?numOfWords=11"></span>11 words n-grams</a>
+        <a type="button" class="btn btn-lg btn-default" href="/?numOfWords=12"></span>12 words n-grams</a>
+        <a type="button" class="btn btn-lg btn-default" href="/?numOfWords=13"></span>13 words n-grams</a>
+        <a type="button" class="btn btn-lg btn-default" href="/?numOfWords=14"></span>14 words n-grams</a>
+
+    </div>
+
+</div>
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>N-gram</th>
+                <th>Repeated</th>
+            </tr>
+        </thead>
+        @for((ngram, freq)
+        <- ngrams) { <tr>
+            <td><a href="search?ngram=@ngram">@ngram</a></td>
+            <td>@freq</td>
+            </tr>
+            }
+    </table>
+</div>
+
+}
