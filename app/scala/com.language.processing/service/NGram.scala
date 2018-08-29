@@ -10,6 +10,7 @@ import scala.util.{Success, Failure}
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
+import play.api.Logger
 
 // Author: Saqib Ali
 
@@ -40,6 +41,7 @@ object NGram {
     val result = block    
     val t1 = System.nanoTime()
     println("Elapsed time: " + (t1 - t0)/1000000000 + "s")
+    Logger.info("Elapsed time: " + (t1 - t0)/1000000000 + "s")
     result
 }
   
