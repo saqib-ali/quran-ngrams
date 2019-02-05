@@ -24,6 +24,7 @@ object NGram {
       .sliding(numOfWords)
       .filter(_.size==numOfWords)
       .map(_.mkString(" "))
+      
       //.map(_.replaceAll("[\\p{P}\\s]+$", ""))
       //.map(_.replaceAll("[\\p{P}\\s]+$", ""))
 
@@ -37,11 +38,12 @@ object NGram {
   }
 
   def time[R](block: => R): R = { //Profile methods / code in Scala. Useful in timining the execution of scala code source: http://stackoverflow.com/q/9160001/420558
+    val infoLogger = Logger("info")
     val t0 = System.nanoTime()
     val result = block    
     val t1 = System.nanoTime()
     println("Elapsed time: " + (t1 - t0)/1000000000 + "s")
-    Logger.info("Elapsed time: " + (t1 - t0)/1000000000 + "s")
+    infoLogger.info("Elapsed time: " + (t1 - t0)/1000000000 + "s")
     result
 }
   
@@ -49,7 +51,7 @@ object NGram {
   def generateNGramFuture(signs: List[String], numOfWords: Int): Future[List[(String, Int)]] = Future{ // Scala N-gram secret sauce
     (for( i <- 0 to signs.length-1) yield  signs(i)
       .replaceAll("([\\p{P}&&[^()]]+\\s*)+$", "")
-      .replaceAll("([\\p{P}&&[^()]]+\\s*)+$", "")
+     // .replaceAll("([\\p{P}&&[^()]]+\\s*)+$", "")
       .split(" ")
       .sliding(numOfWords)
       .filter(_.size==numOfWords)
@@ -68,7 +70,7 @@ object NGram {
       time{
       //val all = ((6 to 24).foldRight(List[(String, Int)]())((i, l) => l ::: generateNGram(signs, i))).sortWith(_._1.length > _._1.length)
       //val all = ((6 to 24).map(i => generateNGram(signs, i)).reduce(_ ::: _)).sortWith(_._1.length > _._1.length)
-      val ngramfutures = (15 to 30).map(i => generateNGramFuture(signs, i)) // Calculate Ngrams using Scala Futures for paralllelization
+      val ngramfutures = (18 to 33).map(i => generateNGramFuture(signs, i)) // Calculate Ngrams using Scala Futures for paralllelization
       val fut = Future.reduceLeft(ngramfutures)(_ ::: _) // Reduce the Futures
       val allresult = Await.result(fut, 20 seconds)    
       val all = allresult.sortWith(_._1.length > _._1.length)
