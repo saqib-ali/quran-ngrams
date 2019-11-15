@@ -1,3 +1,5 @@
+@import java.util.regex.Pattern 
+
 @(signs: List[List[String]], ngram: String) @main("Quran verses containing: " + ngram) {
 
 <!-- Place this tag where you want the button to render. -->
@@ -45,7 +47,7 @@
         @signs.map {sign =>
             <tr>
                 
-            <td>@Html(sign(2).replaceAll(ngram, "<b>" + ngram + "</b>")) <strong>(@sign(0) : @sign(1) - @sign(3))</strong> </td>
+            <td>@Html(sign(2).replaceAll(Pattern.quote(ngram), "<b>" + ngram + "</b>")) <strong>(@sign(0) : @sign(1) - @sign(3))</strong> </td>
             </tr>
             }
     </table>

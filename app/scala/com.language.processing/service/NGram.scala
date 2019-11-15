@@ -3,7 +3,8 @@ package com.language.processing.service
 import scala.collection.mutable.ListBuffer
 
 
-import scala.concurrent.future
+//import scala.concurrent.future
+import scala.language.postfixOps
 import scala.concurrent.{Await, Future}
 import scala.util.{Success, Failure}
 //import scala.collection.parallel.immutable.ParVector
@@ -62,7 +63,7 @@ object NGram {
   
   def longestNGram(signs: List[String]): List[(String, Int)] = {
       time{
-      val ngramfutures = (15 to 33).map(i => generateNGramFuture(signs, i)) // Calculate Ngrams using Scala Futures for paralllelization
+      val ngramfutures = (15 to 40).map(i => generateNGramFuture(signs, i)) // Calculate Ngrams using Scala Futures for paralllelization
       val fut = Future.reduceLeft(ngramfutures)(_ ::: _) // Reduce the Futures
       val allresult = Await.result(fut, 20 seconds)    
       val all = allresult.sortWith(_._1.length > _._1.length)
